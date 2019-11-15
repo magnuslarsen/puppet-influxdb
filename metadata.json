@@ -5,6 +5,8 @@
   "summary": "Install and configures InfluxDB",
   "license": "Apache-2.0",
   "source": "https://github.com/magnuslarsen/puppet-influxdb",
+  "project_page": "https://github.com/magnuslarsen/puppet-influxdb",
+  "issues_url": "https://github.com/magnuslarsen/puppet-influxdb/issues",
   "dependencies": [
     {
       "name": "camptocamp/systemd",
