@@ -3,6 +3,17 @@ This module will install and configure InfluxDB 1.x.
 
 This module works on Debian- and RHEL-based OS'es.
 
+## Dependencies
+This module depends on the toml gem, which has to be installed on the puppetmaster.
+
+It can be installed via puppet, like this ([using this module](https://forge.puppet.com/puppetlabs/puppetserver_gem)):
+```puppet
+package { 'toml':
+  ensure   => 'installed',
+  provider => 'puppetserver_gem',
+}
+```
+
 # Sample setup
 ```puppet
 class { '::influxdb':
