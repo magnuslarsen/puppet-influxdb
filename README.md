@@ -40,7 +40,7 @@ influxdb::database { 'metrics': }
 
 influxdb::user { 'grafana_user':
   password   => 'mySuperSecretPassWORD',
-  privileges => ['READ'],
+  privilege  => 'READ',
   database   => 'metrics',
 }
 ```
