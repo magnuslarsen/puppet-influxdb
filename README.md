@@ -34,6 +34,11 @@ class { '::influxdb':
       'read-buffer'   => 33554432,
     },
   },
+  databases      => {
+    prometheus => {
+      ensure => present,
+    },
+  },
 }
 
 influxdb::database { 'metrics': }
@@ -46,7 +51,7 @@ influxdb::user { 'grafana_user':
 ```
 
 # http auth
-http_auth is automatically enabled and configured.
+http\_auth is automatically enabled and configured.
 
 An admin account will automatically be created with the parameters passed to the main class: `influxdb::admin_username` and `influxdb::admin_password`
 

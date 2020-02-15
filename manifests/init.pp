@@ -18,7 +18,12 @@
 #           'max-series-per-database' => 0,
 #           'max-values-per-tag'      => 0,
 #         }
-#       }
+#       },
+#       databases      => {
+#         prometheus => {
+#           ensure => present,
+#         },
+#       },
 #     }
 #
 # @param ensure         - Whether to create or destroy this resource
@@ -30,6 +35,8 @@
 # @param config_path    - The path to the main configuration file
 # @param group          - The group used for permission on for everything
 # @param owner          - The owner used for permission on for everything
+# @param databases      - Create the provided databases. The hash is passed on to infludb::database
+#                         via create_resources()
 #
 class influxdb (
   String $admin_password,
@@ -42,6 +49,8 @@ class influxdb (
   String                   $config_path    = '/etc/influxdb/influxdb.conf',
   String                   $group          = 'influxdb',
   String                   $owner          = 'influxdb',
+
+  Hash[String, Hash[String, Any]] $databases = {},
 ) {
 
   if ($ensure_package == undef and $ensure == 'present') {
@@ -75,4 +84,6 @@ class influxdb (
     admin_username => $admin_username,
     config_path    => $config_path,
   }
+
+  create_resources('influxdb::database', $databases)
 }
