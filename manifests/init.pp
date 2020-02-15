@@ -24,6 +24,14 @@
 #           ensure => present,
 #         },
 #       },
+#       users => {
+#         grafana => {
+#           password => 'asdfghjkl!"§"!"$',
+#         },
+#         prometheus => {
+#           password => 'asdfghjkl!"§"!"$',
+#         },
+#       }
 #     }
 #
 # @param ensure         - Whether to create or destroy this resource
@@ -36,6 +44,7 @@
 # @param group          - The group used for permission on for everything
 # @param owner          - The owner used for permission on for everything
 # @param databases      - Create the provided databases. The hash is passed on to infludb::database
+# @param users          - Create the provided users. The hash is passed on to infludb::user
 #                         via create_resources()
 #
 class influxdb (
@@ -51,6 +60,7 @@ class influxdb (
   String                   $owner          = 'influxdb',
 
   Hash[String, Hash[String, Any]] $databases = {},
+  Hash[String, Hash[String, Any]] $users = {},
 ) {
 
   if ($ensure_package == undef and $ensure == 'present') {
@@ -86,4 +96,5 @@ class influxdb (
   }
 
   create_resources('influxdb::database', $databases)
+  create_resources('influxdb::user', $users)
 }
