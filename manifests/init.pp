@@ -20,16 +20,16 @@
 #         }
 #       },
 #       databases      => {
-#         prometheus => {
-#           ensure => present,
+#         'prometheus' => {
+#           'ensure' => present,
 #         },
 #       },
-#       users => {
-#         grafana => {
-#           password => 'asdfghjkl!"§"!"$',
+#       users          => {
+#         'grafana' => {
+#           'password' => 'asdfghjkl!"§"!"$',
 #         },
-#         prometheus => {
-#           password => 'asdfghjkl!"§"!"$',
+#         'prometheus' => {
+#           'password' => 'asdfghjkl!"§"!"$',
 #         },
 #       }
 #     }

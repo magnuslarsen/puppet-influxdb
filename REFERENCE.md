@@ -47,6 +47,19 @@ class { '::influxdb':
       'max-series-per-database' => 0,
       'max-values-per-tag'      => 0,
     }
+  },
+  databases      => {
+    'prometheus' => {
+      'ensure' => present,
+    },
+  },
+  users          => {
+    'grafana' => {
+      'password' => 'asdfghjkl!"§"!"$',
+    },
+    'prometheus' => {
+      'password' => 'asdfghjkl!"§"!"$',
+    },
   }
 }
 ```
@@ -122,6 +135,23 @@ Data type: `String`
 - The owner used for permission on for everything
 
 Default value: 'influxdb'
+
+##### `databases`
+
+Data type: `Hash[String, Hash[String, Any]]`
+
+- Create the provided databases. The hash is passed on to infludb::database
+
+Default value: {}
+
+##### `users`
+
+Data type: `Hash[String, Hash[String, Any]]`
+
+- Create the provided users. The hash is passed on to infludb::user
+via create_resources()
+
+Default value: {}
 
 ### influxdb::config
 
