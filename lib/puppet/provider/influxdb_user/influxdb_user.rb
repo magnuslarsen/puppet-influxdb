@@ -13,7 +13,7 @@ Puppet::Type.type(:influxdb_user).provide(:user_management) do
 
     return 'ALL' if is_admin
 
-    JSON.parse(influx_cli("SHOW GRANTS FOR \"#{resource[:username]}\""))['results'][0]['series'][0]['values'].to_h[resource[:database]]
+    JSON.parse(influx_cli("SHOW GRANTS FOR \"#{resource[:username]}\""))['results'][0]['series'][0]['values'].to_h[resource[:database]].gsub('ALL PRIVILEGES', 'ALL')
   end
 
   def privilege=(value)
