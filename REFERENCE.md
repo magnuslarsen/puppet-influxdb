@@ -13,12 +13,14 @@
 **Defined types**
 
 * [`influxdb::database`](#influxdbdatabase): Manages a database within InfluxDB
+* [`influxdb::retention_policy`](#influxdbretention_policy): Manages a retention policy on a database, within InfluxDB
 * [`influxdb::user`](#influxdbuser): Manages a user within InfluxDB
 
 **Resource types**
 
 * [`influxdb_auth`](#influxdb_auth): Setup http_auth in InfluxDB.
 * [`influxdb_database`](#influxdb_database): Create or update a database in InfluxDB.
+* [`influxdb_retention_policy`](#influxdb_retention_policy): Create or update a user in InfluxDB.
 * [`influxdb_user`](#influxdb_user): Create or update a user in InfluxDB.
 
 ## Classes
@@ -235,6 +237,89 @@ Data type: `String`
 
 Default value: $influxdb::admin_username
 
+### influxdb::retention_policy
+
+Creates or destroys a retention policy on a database, within InfluxDB
+
+#### Examples
+
+##### 
+
+```puppet
+influxdb::retention_policy { '1YearRetention':
+  database => 'prometheus',
+  duration => '8640h0m0s',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `influxdb::retention_policy` defined type.
+
+##### `ensure`
+
+Data type: `Enum['present','absent']`
+
+- Create or destroy retention policies
+
+Default value: 'present'
+
+##### `name`
+
+- (namevar) The name of the database
+
+##### `duration`
+
+Data type: `String`
+
+- The duration in which to keep metrics, in duration literals (https://docs.influxdata.com/influxdb/v1.7/query_language/spec/#durations)
+
+##### `shard_duration`
+
+Data type: `Optional[String]`
+
+- The duration in which to keep shards. Set to undef to let InfluxDB decide
+
+Default value: `undef`
+
+##### `database`
+
+Data type: `String`
+
+- Which database the policy should be applied too
+
+##### `replicas`
+
+Data type: `Integer`
+
+- The amount of replicas to use (should be the same as the number of nodes)
+
+Default value: 1
+
+##### `is_default`
+
+Data type: `Boolean`
+
+- Wheter the policy is the default for the database
+
+Default value: `true`
+
+##### `admin_password`
+
+Data type: `String`
+
+
+
+Default value: $influxdb::admin_password
+
+##### `admin_username`
+
+Data type: `String`
+
+
+
+Default value: $influxdb::admin_username
+
 ### influxdb::user
 
 Create, destroy or update a user within InfluxDB
@@ -397,6 +482,64 @@ Admin password to manage the resource with
 ##### `database`
 
 The database to create
+
+### influxdb_retention_policy
+
+Create or update a user in InfluxDB.
+
+#### Properties
+
+The following properties are available in the `influxdb_retention_policy` type.
+
+##### `ensure`
+
+Valid values: present, absent
+
+The basic property that the resource should be in.
+
+Default value: present
+
+##### `duration`
+
+The duration to keep data for
+
+##### `shard_duration`
+
+The duration to keep shards for
+
+##### `replicas`
+
+The amount of replicas to use
+
+##### `is_default`
+
+Whether or not this policy is the default for the database
+
+#### Parameters
+
+The following parameters are available in the `influxdb_retention_policy` type.
+
+##### `name`
+
+namevar
+
+A unique name for the resource
+
+##### `admin_username`
+
+Admin username to manage the resource with
+
+##### `admin_password`
+
+Admin password to manage the resource with
+
+##### `retention_policy`
+
+The retention policy to create
+
+##### `database`
+
+The database the retention policy should be applied to
 
 ### influxdb_user
 

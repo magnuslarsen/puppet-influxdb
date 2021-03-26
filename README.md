@@ -56,6 +56,13 @@ influxdb::user { 'grafana_user':
   privilege  => 'READ',
   database   => 'metrics',
 }
+
+# Note: for durations, InfluxDB converts the duration literals to something else. Write that something else in puppet.
+influxdb::retention_policy { '1YearRetention':
+  database => 'prometheus',
+  duration => '8640h0m0s',
+}
+
 ```
 
 # http auth

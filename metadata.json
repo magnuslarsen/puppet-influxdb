@@ -1,6 +1,6 @@
 {
   "name": "mightp-influxdb",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Magnus Larsen",
   "summary": "Install and configures InfluxDB",
   "license": "Apache-2.0",
